@@ -106,9 +106,6 @@ class MyGame(arcade.Window):
         self.time_since_spawn = 0
         self.spawn_rate = 5.0  # Un nemico ogni 5 secondi
         self.shooting_speed = 3.0  # Nemici sparano ogni 3 secondi
-
-    def get_player_color(self, delta_time):
-            return self.health
     
     def on_draw(self):
         """Disegna tutti gli elementi del gioco"""
