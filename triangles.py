@@ -106,10 +106,20 @@ class MyGame(arcade.Window):
         self.time_since_spawn = 0
         self.spawn_rate = 5.0  # Un nemico ogni 5 secondi
         self.shooting_speed = 3.0  # Nemici sparano ogni 3 secondi
-        
+
+    def get_player_color(self, delta_time):
+            return self.health
+    
     def on_draw(self):
         """Disegna tutti gli elementi del gioco"""
         self.clear()
+
+        color_list = [
+            arcade.color.BLACK,
+            arcade.color.YELLOW,
+            arcade.color.GREEN,
+            arcade.color.BLUE
+            ]
         
         # Disegna il giocatore (quadrato blu)
         arcade.draw_lrbt_rectangle_filled(
@@ -117,7 +127,7 @@ class MyGame(arcade.Window):
             self.square_x + self.square_size / 2,
             self.square_y - self.square_size / 2,
             self.square_y + self.square_size / 2,
-            arcade.color.BLUE
+            color_list[self.health]
         )
         
         # TODO 1: Cambia il colore del quadrato in base alla vita
@@ -128,6 +138,8 @@ class MyGame(arcade.Window):
         # - BLACK se non è vivo
         # Poi usa questo colore invece di arcade.color.BLUE
         
+        # Problema fixato
+
         # Disegna i nemici (triangoli rossi)
         for enemy in self.enemies:
             arcade.draw_triangle_filled(
@@ -151,6 +163,7 @@ class MyGame(arcade.Window):
         # Suggerimento: Controlla se il giocatore è vivo, poi usa arcade.draw_text
         # per mostrare "GAME OVER" al centro dello schermo in rosso e grassetto
     
+
     def update_velocity(self):
         """Aggiorna la velocità in base ai tasti premuti"""
         self.velocity_x = 0
@@ -222,6 +235,9 @@ class MyGame(arcade.Window):
     # TODO 0: sembra che i controlli siano un po'... Strani. Riesci a sistemarli? 
     # Consiglio: Se fai partire il programma noterai che in realtà il movimento verso l'alto e verso il basso funziona
     # Bisogna sistemare solo il movimento a sinistra e destra
+    
+    # Problema fixato
+    
     def on_key_press(self, key, modifiers):
         """Gestisce la pressione dei tasti"""
         if key in [arcade.key.UP, arcade.key.W]:
