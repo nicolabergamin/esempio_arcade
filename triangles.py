@@ -85,6 +85,7 @@ class MyGame(arcade.Window):
         self.square_x = SCREEN_WIDTH / 2
         self.square_y = SCREEN_HEIGHT / 2
         self.speed = 200
+        self.speed_increase_rate = 0
         self.velocity_x = 0
         self.velocity_y = 0
         self.health = 3
@@ -201,6 +202,12 @@ class MyGame(arcade.Window):
         half_size = self.square_size / 2
         self.square_x = max(half_size, min(SCREEN_WIDTH - half_size, self.square_x))
         self.square_y = max(half_size, min(SCREEN_HEIGHT - half_size, self.square_y))
+        
+        self.speed_increase_rate += 1
+
+        if self.speed_increase_rate == 120:
+            self.speed += self.speed / 100 * 10
+            self.speed_increase_rate = 0
         
         # Spawn dei nemici
         self.time_since_spawn += delta_time
